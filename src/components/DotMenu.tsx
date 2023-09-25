@@ -7,8 +7,8 @@ import { MoreVertical } from "lucide-react"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { FC } from "react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { useRouter } from "next/navigation"
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/react"
 
 interface IDotMenu {
   post: Post & {
@@ -29,7 +29,7 @@ const DotMenu: FC<IDotMenu> = ({ post }) => {
       const payload: PostDeleteRequest = {
         postId
       }
-      
+
       const { data } = await axios.post('/api/subreddit/post/delete', payload)
 
       return data
@@ -51,34 +51,22 @@ const DotMenu: FC<IDotMenu> = ({ post }) => {
   })
 
   return (
-    <DropdownMenu >
-      <DropdownMenuTrigger >
-        <MoreVertical />
-      </DropdownMenuTrigger>
+    <Dropdown >
+      <DropdownTrigger > 
+        <div className="cursor-pointer">
+          <MoreVertical />
+        </div>
+      </DropdownTrigger>
 
-      <DropdownMenuContent className='bg-white' align='center'>
+      <DropdownMenu  variant="flat" aria-label="Post settings" disabledKeys={(isUserPostAuthor || isUserAdmin) ? [] : ["delete"]}>
+        <DropdownItem key="report" startContent={<Link href='/' className="w-full h-full">Report</Link>} />
+        <DropdownItem key="share" startContent={<Link href='/' className="w-full h-full">Share</Link>} showDivider={(isUserPostAuthor || isUserAdmin)} />
+        <DropdownItem key="delete" className="w-full h-full">
+          <button onClick={() => deletePost({ postId: post.id })}>Delete</button>
+        </DropdownItem>
 
-        <DropdownMenuItem asChild className='cursor-pointer'>
-          <Link href='/'>Report</Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem asChild className='cursor-pointer'>
-          <Link href='/r/create'>Share</Link>
-        </DropdownMenuItem>
-
-        {(isUserPostAuthor || isUserAdmin) && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className='cursor-pointer w-full'>
-              <button onClick={() => deletePost({ postId: post.id })}>Delete</button>
-            </DropdownMenuItem>
-          </>
-        )}
-
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </DropdownMenu>
+    </Dropdown>
   )
 }
 

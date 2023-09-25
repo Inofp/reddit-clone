@@ -26,7 +26,8 @@ export default function RootLayout({
       className={cn(
         'bg-white text-slate-900 antialiased light',
         inter.className
-      )}>
+      )}
+    >
       <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
         <Providers>
           {/* @ts-expect-error Server Component */}
