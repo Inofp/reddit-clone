@@ -1,10 +1,8 @@
 'use client'
 
+import { Brush, Slack } from 'lucide-react'
 import { FC, useState } from 'react'
 import { Button } from './ui/Button'
-import { Brush, Slack } from 'lucide-react'
-import GeneralFeed from './GeneralFeed'
-import CustomFeed from './CustomFeed'
 
 interface IArimafp {
     session: boolean

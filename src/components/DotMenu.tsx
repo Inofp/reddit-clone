@@ -1,14 +1,14 @@
 import { toast } from "@/hooks/use-toast"
 import { PostDeleteRequest } from "@/lib/validators/post"
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react"
 import { Post, User } from "@prisma/client"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { MoreVertical } from "lucide-react"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import { FC } from "react"
 import { useRouter } from "next/navigation"
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/react"
+import { FC } from "react"
 
 interface IDotMenu {
   post: Post & {

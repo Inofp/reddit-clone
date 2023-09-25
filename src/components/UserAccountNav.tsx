@@ -1,6 +1,6 @@
 'use client'
 
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/react"
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react"
 import { User } from 'next-auth'
 import { signOut } from "next-auth/react"
 import Link from 'next/link'
